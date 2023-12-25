@@ -11,9 +11,11 @@ export default async function Page({ params }: { params: { id: string } }) {
   const { id } = params;
   const post = await getPost(id);
   return (
-    <div>
-      <h1>{post.name}</h1>
-      <p>{post.content}</p>
+    <div className="flex justify-center w-full">
+      <div className="flex flex-col items-center gap-8 max-w-[50%]">
+        <h1 className="font-medium text-2xl italic">{post.name}</h1>
+        <p>{post.content}</p>
+      </div>
     </div>
   );
 }
