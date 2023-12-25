@@ -1,5 +1,4 @@
 import { PostWithId } from "@/database/types/types";
-import { getPosts } from "@/services/post.service";
 import Link from "next/link";
 import React from "react";
 
