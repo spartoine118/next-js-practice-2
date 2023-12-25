@@ -33,7 +33,10 @@ const UserInfo = () => {
       ></ButtonComponent>
     </div>
   ) : (
-    <Link href={"/auth/login"}>Login</Link>
+    <div className="flex gap-4">
+      <Link href={"/auth/login"}>Login</Link>
+      <Link href={"/auth/register"}>Register</Link>
+    </div>
   );
 };
 

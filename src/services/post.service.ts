@@ -1,4 +1,5 @@
 import { Post, PostWithId } from "@/database/types/types";
+import { InsertOneResult } from "mongodb";
 
 export const getPosts = async (): Promise<PostWithId[]> => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/api/posts`, {
@@ -19,7 +20,7 @@ export const createPost = async (
   name: string,
   content: string,
   userId: string
-): Promise<PostWithId> => {
+): Promise<InsertOneResult<Post>> => {
   const bodyObj: Post = { userId: userId, name: name, content: content };
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URI}/api/posts/create-post`,
@@ -31,6 +32,6 @@ export const createPost = async (
       body: JSON.stringify(bodyObj),
     }
   );
-  const post: PostWithId = await res.json();
+  const post: InsertOneResult<Post> = await res.json();
   return post;
 };

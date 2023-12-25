@@ -21,3 +21,6 @@ export const disconnectDatabase = async () => {
     console.log("disconnected from database");
   }
 };
+
+client.connect();
+export const db = client.db("user-reg-antoine");

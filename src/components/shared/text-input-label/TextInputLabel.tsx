@@ -5,6 +5,7 @@ export interface TextInputLabelInterface {
   label?: string;
   value?: string;
   type?: string;
+  name?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -13,6 +14,7 @@ export default function TextInputLabel({
   label = "Label",
   type = "text",
   value,
+  name,
   onChange,
 }: TextInputLabelInterface) {
   return (
@@ -20,6 +22,7 @@ export default function TextInputLabel({
       {label}
       <input
         type={type}
+        name={name}
         className="border-[1px] border-blue-400 rounded outline-none w-min p-1"
         onChange={onChange}
         value={value}
