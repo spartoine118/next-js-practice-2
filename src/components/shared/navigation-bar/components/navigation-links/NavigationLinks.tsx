@@ -1,13 +1,13 @@
-import Link from "next/link";
+import LinkComponent from "@/components/shared/link-component/LinkComponent";
 import React from "react";
 
-const NavigationLinks = () => {
+const NavigationLinkComponents = () => {
   return (
     <div className="flex gap-4">
-      <Link href={"/"}>Home</Link>
-      <Link href={"/post/create-post"}>Create Post</Link>
+      <LinkComponent text="Home" href={"/"} />
+      <LinkComponent text="Create Post" href={"/post/create-post"} />
     </div>
   );
 };
 
-export default NavigationLinks;
+export default NavigationLinkComponents;
