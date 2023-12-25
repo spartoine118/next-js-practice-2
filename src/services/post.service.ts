@@ -1,0 +1,36 @@
+import { Post, PostWithId } from "@/database/types/types";
+
+export const getPosts = async (): Promise<PostWithId[]> => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/api/posts`, {
+    cache: "no-store",
+    method: "GET",
+  });
+  const post: PostWithId[] = await res.json();
+  return post;
+};
+
+export const getPost = async (id: string): Promise<PostWithId> => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/api/posts/${id}`);
+  const post: PostWithId = await res.json();
+  return post;
+};
+
+export const createPost = async (
+  name: string,
+  content: string,
+  userId: string
+): Promise<PostWithId> => {
+  const bodyObj: Post = { userId: userId, name: name, content: content };
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URI}/api/posts/create-post`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify(bodyObj),
+    }
+  );
+  const post: PostWithId = await res.json();
+  return post;
+};
