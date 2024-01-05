@@ -1,5 +1,5 @@
 import { RegisterFormInterface } from "@/components/auth/RegisterForm";
-import { User, UserWithId } from "@/database/types/types";
+import { User, UserCredentials, UserWithId } from "@/database/types/types";
 import { InsertOneResult } from "mongodb";
 import { signIn } from "next-auth/react";
 
@@ -25,5 +25,17 @@ export async function register(
     }
   );
   const user: InsertOneResult<User> = await res.json();
+  return user;
+}
+
+export async function login(query: UserCredentials): Promise<UserWithId> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/api/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(query),
+  });
+  const user = await res.json();
   return user;
 }

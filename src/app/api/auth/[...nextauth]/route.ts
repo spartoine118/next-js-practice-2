@@ -4,7 +4,8 @@ import {
   connectedDatabase,
   disconnectDatabase,
 } from "../../../../database/connection";
-import { User, UserWithId } from "@/database/types/types";
+import { User, UserCredentials, UserWithId } from "@/database/types/types";
+import { login } from "@/services/auth.service";
 
 const authOptions: AuthOptions = {
   pages: { signIn: "/login" },
@@ -40,16 +41,15 @@ const authOptions: AuthOptions = {
         },
       },
       async authorize(credentials, req) {
-        const query: Partial<UserWithId> = {
-          email: credentials?.username,
-          password: credentials?.password,
+        if (!credentials?.password && !credentials?.username) {
+          return null;
+        }
+        const query: UserCredentials = {
+          email: credentials.username,
+          password: credentials.password,
         };
 
-        const dbConnection = await connectedDatabase();
-
-        const data = await dbConnection
-          .collection<User>("users")
-          .findOne(query);
+        const data = await login(query);
 
         if (data) {
           // Any object returned will be saved in `user` property of the JWT

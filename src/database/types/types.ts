@@ -19,3 +19,8 @@ export interface User {
 }
 
 export type UserWithId = WithId<User>;
+
+export interface UserCredentials {
+  email: string;
+  password: string;
+}
