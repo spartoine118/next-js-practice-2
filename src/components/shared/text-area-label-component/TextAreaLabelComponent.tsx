@@ -1,11 +1,11 @@
 import React, { ChangeEvent } from "react";
 
-interface TextAreaLabelComponentInterface {
-  placeholder?: string;
+interface TextAreaLabelComponentInterface
+  extends React.DetailedHTMLProps<
+    React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+    HTMLTextAreaElement
+  > {
   label?: string;
-  value?: string;
-  type?: string;
-  onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 const TextAreaLabelComponent = ({
