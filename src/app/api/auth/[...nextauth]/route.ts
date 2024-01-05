@@ -1,9 +1,5 @@
 import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import {
-  connectedDatabase,
-  disconnectDatabase,
-} from "../../../../database/connection";
 import { User, UserCredentials, UserWithId } from "@/database/types/types";
 import { login } from "@/services/auth.service";
 
