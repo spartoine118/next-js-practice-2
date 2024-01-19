@@ -1,9 +1,11 @@
 import React from "react";
 
-export interface ButtonComponentInterface {
+export interface ButtonComponentInterface
+  extends React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
   text: string;
-  type?: "submit" | "reset" | "button" | undefined;
-  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 const ButtonComponent = ({ text, type, onClick }: ButtonComponentInterface) => {

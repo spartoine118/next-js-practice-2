@@ -1,12 +1,11 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes } from "react";
 
-export interface TextInputLabelInterface {
-  placeholder?: string;
-  label?: string;
-  value?: string;
-  type?: string;
-  name?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+export interface TextInputLabelInterface
+  extends DetailedHTMLProps<
+    InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
+  label: string;
 }
 
 export default function TextInputLabel({

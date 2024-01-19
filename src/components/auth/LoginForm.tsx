@@ -1,7 +1,7 @@
 "use client";
 import { ChangeEvent, FormEvent, useState } from "react";
 import ButtonComponent from "@/components/shared/button-component/ButtonComponent";
-import { authenticate } from "@/services/auth.service";
+import { authenticate, login } from "@/services/auth.service";
 import TextInputLabel from "../shared/text-input-label/TextInputLabel";
 
 export default function LoginForm() {

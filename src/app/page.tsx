@@ -1,18 +1,19 @@
-import PostContainer from "@/components/home/PostContainer";
-import { getPosts } from "@/services/post.service";
+import PostList from "@/components/home/PostList";
+import SearchBar from "@/components/shared/search-bar/SearchBar";
+import { useSearchParams } from "next/navigation";
 
-export default async function Page() {
-  const posts = await getPosts();
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+  };
+}) {
   return (
     <main className="flex max-h-screen flex-col items-center gap-4 bg-sky-100">
+      <SearchBar />
       <h1 className="text-2xl font-semibold italic p-4">New posts</h1>
-      {posts.length && (
-        <div className="flex flex-col gap-4 p-4 border-4 border-solid border-blue-400 w-[40%] items-center overflow-y-scroll">
-          {posts.map((post) => (
-            <PostContainer key={post._id.toString()} post={post} />
-          ))}
-        </div>
-      )}
+      <PostList query={searchParams?.query} />
     </main>
   );
 }

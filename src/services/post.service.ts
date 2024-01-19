@@ -16,6 +16,24 @@ export const getPost = async (id: string): Promise<PostWithId> => {
   return post;
 };
 
+export const getPostsWithQuery = async (
+  query: string
+): Promise<PostWithId[]> => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URI}/api/posts/search/${query}`,
+    {
+      method: "POST",
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query: query }),
+    }
+  );
+  const posts: PostWithId[] = await res.json();
+  return posts;
+};
+
 export const createPost = async (
   name: string,
   content: string,
