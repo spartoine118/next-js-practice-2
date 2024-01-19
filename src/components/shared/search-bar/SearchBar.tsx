@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useCallback, useState } from "react";
 import TextInputLabel from "../text-input-label/TextInputLabel";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { debounce } from "lodash";
@@ -12,10 +12,8 @@ const SearchBar = () => {
   const pathName = usePathname();
   const { replace } = useRouter();
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>): any => {
+  const changesParams = (input: string) => {
     const params = new URLSearchParams(searchParams);
-    const input = e.currentTarget.value;
-    setSearchQuery(input);
     params.set("query", input);
     if (!input) {
       params.delete("query");
@@ -23,16 +21,21 @@ const SearchBar = () => {
     replace(`${pathName}?${params.toString()}`);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedChangeParams = useCallback(debounce(changesParams, 1000), []);
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>): any => {
+    const input = e.currentTarget.value;
+    setSearchQuery(input);
+    debouncedChangeParams(input);
+  };
+
   return (
     <div>
       <TextInputLabel
         label=""
         placeholder="Enter a search term"
-        onChange={(e) => {
-          debounce(() => {
-            onChange(e);
-          });
-        }}
+        onChange={onChange}
         value={searchQuery}
       />
     </div>
